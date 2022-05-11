@@ -18,10 +18,10 @@ TRIANGLES = (
 if __name__ == "__main__":
     robot = Robot(LEGS, TRIANGLES)
 
-    while True:
-        robot.neutral_position()
-        sleep(10)
-        robot.move_forward()
-        sleep(10)
+    robot.neutral_position()
 
+    while True:
+        if input():
+            robot.move_forward()
+        robot.neutral_position()
 
