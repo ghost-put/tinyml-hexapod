@@ -1,7 +1,6 @@
 from .leg import Leg
 from .triangle import Triangle
 from machine import Pin
-from time import sleep
 
 
 class Robot:
@@ -15,7 +14,7 @@ class Robot:
         led(1)
 
     @staticmethod
-    def init_triangles(left_triangle: Triangle, right_triangle) -> dict:
+    def init_triangles(left_triangle: Triangle, right_triangle) -> dict[str, Triangle]:
         return {"left": left_triangle, "right": right_triangle}
 
     @staticmethod
@@ -23,60 +22,23 @@ class Robot:
         leg.set_position(knee_angle, thigh_angle)
 
     def neutral_position(self) -> None:
-        for leg in self.triangles["left"].legs.values():
-            leg.set_position(90, 90)
-        for leg in self.triangles["right"].legs.values():
-            leg.set_position(90, 90)
+        self.triangles["left"].neutral()
+        self.triangles["right"].neutral()
 
     def move_forward(self) -> None:
-        self.move_triangle("left")
-        self.move_triangle("right")
+        self.triangles["left"].move()
+        self.triangles["right"].move()
 
     def move_left(self) -> None:
-        self.rotate_triangle("left", 150, 30)
-        self.rotate_triangle("right", 30, 150)
+        self.triangles["left"].rotate(thigh_angle_middle=150, thigh_angle_rest=30)
+        self.triangles["right"].rotate(thigh_angle_middle=30, thigh_angle_rest=150)
 
     def move_right(self) -> None:
-        self.rotate_triangle("left", 30, 150)
-        self.rotate_triangle("right", 150, 30)
+        self.triangles["left"].rotate(thigh_angle_middle=30, thigh_angle_rest=150)
+        self.triangles["right"].rotate(thigh_angle_middle=150, thigh_angle_rest=30)
 
     def move_backward(self) -> None:
-        self.move_triangle("left", thigh_angle = 30)
-        self.move_triangle("right", thigh_angle = 30)
+        self.triangles["left"].move(thigh_angle=30)
+        self.triangles["right"].move(thigh_angle=30)
 
-    def move_triangle(self, triangle: str, knee_angle: int = 125, thigh_angle: int = 150) -> None:
-        self.neutral_position()
-        sleep(1)
-        self.triangle_up(self.triangles[triangle], knee_angle)
-        self.triangle_move(self.triangles[triangle], knee_angle, thigh_angle)
-        self.triangle_down(self.triangles[triangle], thigh_angle, thigh_angle)
-
-    def rotate_triangle(self, triangle: str, thigh_angle_middle: int, thigh_angle_rest: int, knee_angle: int = 125) -> None:
-        self.neutral_position()
-        sleep(1)
-        self.triangle_up(self.triangles[triangle], knee_angle)
-        self.triangle_rotate(self.triangles[triangle], knee_angle, thigh_angle_middle, thigh_angle_rest)
-        self.triangle_down(self.triangles[triangle], thigh_angle_middle, thigh_angle_rest)
-
-    def triangle_up(self, triangle: Triangle, knee_angle: int) -> None:
-        for leg in triangle.legs.values():
-            self.set_leg_position(leg, knee_angle, 90)
-        sleep(1)
-
-    def triangle_down(self, triangle: Triangle, thigh_angle_middle: int, thigh_angle_rest: int) -> None:
-        self.set_leg_position(triangle.legs["front"], 90, thigh_angle_rest)
-        self.set_leg_position(triangle.legs["middle"], 90, thigh_angle_middle)
-        self.set_leg_position(triangle.legs["back"], 90, thigh_angle_rest)
-        sleep(1)
-
-    def triangle_move(self, triangle: Triangle, knee_angle: int, thigh_angle: int) -> None:
-        for leg in triangle.legs.values():
-            self.set_leg_position(leg, knee_angle, thigh_angle)
-        sleep(1)
-
-    def triangle_rotate(self, triangle: Triangle, knee_angle: int, thigh_angle_middle: int, thigh_angle_rest: int) -> None:
-        self.set_leg_position(triangle.legs["front"], knee_angle, thigh_angle_rest)
-        self.set_leg_position(triangle.legs["middle"], knee_angle, thigh_angle_middle)
-        self.set_leg_position(triangle.legs["back"], knee_angle, thigh_angle_rest)
-        sleep(1)
 
