@@ -14,9 +14,13 @@ class Triangle:
     def init_leg(self, leg: tuple) -> Leg:
         return Leg(leg[0], leg[1], self.freq)
 
+    @staticmethod
+    def set_leg_position(leg: Leg, knee_angle: int, thigh_angle: int) -> None:
+        leg.set_position(knee_angle, thigh_angle)
+
     def neutral(self) -> None:
         for leg in self.legs.values():
-            leg.set_position(self.neutral_angle, self.neutral_angle)
+            self.set_leg_position(leg, self.neutral_angle, self.neutral_angle)
         sleep(1)
 
     def move(self, thigh_angle: int = 150, knee_angle: int = 125) -> None:
@@ -33,18 +37,18 @@ class Triangle:
 
     def legs_up(self, knee_angle: int) -> None:
         for leg in self.legs.values():
-            leg.set_position(knee_angle, self.neutral_angle)
+            self.set_leg_position(leg, knee_angle, self.neutral_angle)
         sleep(1)
 
     def legs_down(self, thigh_angle_middle: int, thigh_angle_rest: int) -> None:
-        self.legs["front"].set_position(self.neutral_angle, thigh_angle_rest)
-        self.legs["middle"].set_position(self.neutral_angle, thigh_angle_middle)
-        self.legs["back"].set_position(self.neutral_angle, thigh_angle_rest)
+        self.set_leg_position(self.legs["front"], self.neutral_angle, thigh_angle_rest)
+        self.set_leg_position(self.legs["middle"], self.neutral_angle, thigh_angle_middle)
+        self.set_leg_position(self.legs["back"], self.neutral_angle, thigh_angle_rest)
         sleep(1)
 
     def legs_move(self, knee_angle: int, thigh_angle_middle: int, thigh_angle_rest: int) -> None:
-        self.legs["front"].set_position(knee_angle, thigh_angle_rest)
-        self.legs["middle"].set_position(knee_angle, thigh_angle_middle)
-        self.legs["back"].set_position(knee_angle, thigh_angle_rest)
+        self.set_leg_position(self.legs["front"], knee_angle, thigh_angle_rest)
+        self.set_leg_position(self.legs["middle"], knee_angle, thigh_angle_middle)
+        self.set_leg_position(self.legs["back"], knee_angle, thigh_angle_rest)
         sleep(1)
 
