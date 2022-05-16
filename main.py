@@ -19,7 +19,14 @@ if __name__ == "__main__":
     robot.neutral_position()
 
     while True:
-        if input():
+        input_ = input()
+        if input_ == "f":
             robot.move_forward()
+        elif input_ == "p":
+            robot.move_right()
+        elif input_ == "l":
+            robot.move_left()
+        elif input_ == "b":
+            robot.move_backward()
         robot.neutral_position()
 

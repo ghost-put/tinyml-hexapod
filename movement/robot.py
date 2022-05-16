@@ -37,8 +37,7 @@ class Robot:
         self.triangles["left"].rotate(thigh_angle_middle=30, thigh_angle_rest=150)
         self.triangles["right"].rotate(thigh_angle_middle=150, thigh_angle_rest=30)
 
-    def move_backward(self) -> None:
-        self.triangles["left"].move(thigh_angle=30)
-        self.triangles["right"].move(thigh_angle=30)
-
+    def move_right(self) -> None:
+        self.triangles["left"].move(self.triangles["right"], thigh_angle_middle=55, thigh_angle_rest=55)
+        self.triangles["right"].move(self.triangles["left"], thigh_angle_middle=55, thigh_angle_rest=55)
 

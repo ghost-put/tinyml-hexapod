@@ -21,17 +21,11 @@ class Triangle:
     def neutral(self) -> None:
         for leg in self.legs.values():
             self.set_leg_position(leg, self.neutral_angle, self.neutral_angle)
-        sleep(1)
+        sleep_ms(self.sleep_time)
 
-    def move(self, thigh_angle: int = 150, knee_angle: int = 125) -> None:
-        self.neutral()
+    def move(self, other: 'Triangle', thigh_angle_middle: int, thigh_angle_rest: int, knee_angle: int = 30) -> None:
         self.legs_up(knee_angle)
-        self.legs_move(knee_angle, thigh_angle, thigh_angle)
-        self.legs_down(thigh_angle, thigh_angle)
-
-    def rotate(self, thigh_angle_middle: int, thigh_angle_rest: int, knee_angle: int = 125) -> None:
-        self.neutral()
-        self.legs_up(knee_angle)
+        other.neutral()
         self.legs_move(knee_angle, thigh_angle_middle, thigh_angle_rest)
         self.legs_down(thigh_angle_middle, thigh_angle_rest)
 
@@ -50,5 +44,4 @@ class Triangle:
         self.set_leg_position(self.legs["front"], knee_angle, thigh_angle_rest)
         self.set_leg_position(self.legs["middle"], knee_angle, thigh_angle_middle)
         self.set_leg_position(self.legs["back"], knee_angle, thigh_angle_rest)
-        sleep(1)
-
+        sleep_ms(self.sleep_time)
