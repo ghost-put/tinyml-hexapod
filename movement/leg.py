@@ -6,10 +6,10 @@ class Leg:
     """
 
     """
-    def __init__(self, knee_id: int, thigh_id: int, freq: int) -> None:
+    def __init__(self, thigh_id: int, knee_id: int, freq: int) -> None:
         #TODO: offset serwa
-        self.knee = PWM(Pin(knee_id))
         self.thigh = PWM(Pin(thigh_id))
+        self.knee = PWM(Pin(knee_id))
         self.set_freq(freq)
 
     def set_freq(self, freq: int) -> None:
