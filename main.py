@@ -19,6 +19,7 @@ if __name__ == "__main__":
     robot.neutral_position()
 
     while True:
+        # robot.move_forward()
         input_ = input()
         if input_ == "f":
             robot.move_forward()

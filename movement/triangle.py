@@ -1,5 +1,5 @@
 from .leg import Leg
-from time import sleep
+from time import sleep_ms
 
 
 class Triangle:
@@ -7,6 +7,7 @@ class Triangle:
         self.freq = freq
         self.neutral_angle = neutral_angle
         self.legs = self.set_triangle(front, middle, back)
+        self.sleep_time = 250
 
     def set_triangle(self, front: tuple, middle: tuple, back: tuple) -> dict[str, Leg]:
         return {"front": self.init_leg(front), 'middle': self.init_leg(middle), 'back': self.init_leg(back)}
@@ -32,13 +33,13 @@ class Triangle:
     def legs_up(self, knee_angle: int) -> None:
         for leg in self.legs.values():
             self.set_leg_position(leg, knee_angle, self.neutral_angle)
-        sleep(1)
+        sleep_ms(self.sleep_time)
 
     def legs_down(self, thigh_angle_middle: int, thigh_angle_rest: int) -> None:
         self.set_leg_position(self.legs["front"], self.neutral_angle, thigh_angle_rest)
         self.set_leg_position(self.legs["middle"], self.neutral_angle, thigh_angle_middle)
         self.set_leg_position(self.legs["back"], self.neutral_angle, thigh_angle_rest)
-        sleep(1)
+        sleep_ms(self.sleep_time)
 
     def legs_move(self, knee_angle: int, thigh_angle_middle: int, thigh_angle_rest: int) -> None:
         self.set_leg_position(self.legs["front"], knee_angle, thigh_angle_rest)

@@ -1,5 +1,5 @@
 from machine import PWM, Pin
-from .exceptions import BadAngle
+from .functions import set_servo_angle
 
 
 class Leg:
