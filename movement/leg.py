@@ -24,7 +24,7 @@ class Leg:
         self.set_thigh_position(thigh_angle)
 
     def set_knee_position(self, angle):
-        self.set_servo_angle(angle, self.knee)
+        set_servo_angle(angle, self.knee)
 
     def set_thigh_position(self, angle):
-        self.set_servo_angle(angle, self.thigh)
+        set_servo_angle(angle, self.thigh)
