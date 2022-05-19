@@ -30,8 +30,8 @@ class Robot:
 
     def move_right(self) -> None:
         self.triangles["left"].move(self.triangles["right"], thigh_angle_middle=55, thigh_angle_rest=55)
-        self.triangles["right"].move(self.triangles["left"], thigh_angle_middle=125, thigh_angle_rest=125)
+        self.triangles["right"].move(self.triangles["left"], thigh_angle_middle=55, thigh_angle_rest=55)
 
     def move_left(self) -> None:
         self.triangles["left"].move(self.triangles["right"], thigh_angle_middle=125, thigh_angle_rest=125)
-        self.triangles["right"].move(self.triangles["left"], thigh_angle_middle=55, thigh_angle_rest=55)
+        self.triangles["right"].move(self.triangles["left"], thigh_angle_middle=125, thigh_angle_rest=125)

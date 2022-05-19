@@ -6,7 +6,7 @@ class Leg:
     """
     """
     def __init__(self, thigh_id: int, knee_id: int, freq: int) -> None:
-        #TODO: offset serwa
+        # TODO: servo offset
         self.thigh = PWM(Pin(thigh_id))
         self.knee = PWM(Pin(knee_id))
         self.set_freq(freq)
